@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./w3.css">
+	<style>
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #111;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+.divfooter{
+	width:100%;
+	padding: 15px;
+	padding-left: 25px;	
+	bottom: 0px;
+	left: 0px;
+	position: fixed;
+	margin: auto;
+}
+
+input[type=text], input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+	font-size:14px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #f3f3f3;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+	font-size:18px;
+	font-style: bold;
+}
+
+input[type=submit]:hover {
+    background-color: #e5e5e5;
+}
+
+.rightdiv{
+	box-sizing:border-box;
+	z-index: 1;
+	margin: 5% auto 15% auto;
+	position:fixed;
+	display: none;
+	width:30%;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.4);
+}
+
+.div01 {
+    border-radius: 5px;
+    background-image: linear-gradient(#673ef9, #9c23ff);
+    padding: 20px;
+}
+
+.animate {
+    -webkit-animation: animatezoom 0.4s;
+    animation: animatezoom 0.4s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+
+@media screen and (max-width:800px) {
+  .rightdiv {
+    width:60%;
+	float:none;
+	margin: auto;
+	padding:none;
+  }
+  .divfooter{
+	padding: none;
+	margin: auto;
+  }
+}
+
+		
+		.mySlides {display: none}
+img {vertical-align: middle;}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+	</style>
+	</head>
+	<body>
+		<div>
+			<div class="navbar">
+				<ul>
+					<li><a href="#">PHOTO EDITOR</a></li>
+					<li style="float:right"><a href="#" class="active" onclick="document.getElementById('create').style.display='block'">Get Started</a></li>
+					<li style="float:right"><a href="#" onclick="document.getElementById('login').style.display='block'">Login</a></li>
+				</ul>
+			</div>
+		</div>
+		
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
+  <img class="w3-image" src="./img/citywallpaper.jpg" width="1600" height="800">
+  <div class="w3-display-bottomleft w3-padding-large w3-opacity">
+    <h1 class="w3-xxlarge">Photo Editor</h1>
+  </div>
+</header>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px">
+
+  <!-- About Section -->
+  <div class="w3-row w3-padding-64" id="about">
+    <div class="w3-col m6 w3-padding-large w3-hide-small">
+     <img src="./img/logo.png" class="w3-round w3-image w3-opacity-min" alt="Table Setting" width="600" height="750">
+    </div>
+
+    <div class="w3-col m6 w3-padding-large">
+      <h1 class="w3-center">About Photo Editor</h1><br>
+      <p class="w3-large">Image editing is considered a creative, artistic act. Image editing is done for removing unwanted elements such as dust specks and scratches, adjusting the geometry of the image like rotating and cropping, correcting for lens aberrations, sharpening or softening the image, making color changes or adding special effects to the image. Often the tasks involved in image editing are repetitive and need intense processing.</p>
+       </div>
+  </div>
+  
+		
+		<div id="create" class="modal">
+			<div class="modal-content">
+				<form action="./createAccount.php" method="POST" onsubmit="return validateForm()">
+					<div onclick="document.getElementById('create').style.display='none'" class="close" title="Close Form">
+						<i class="fa fa-close"style="font-size:25px;"></i>
+					</div>
+					<label style="font-size: 23px;color: black;text-align: center;">Create an Account</label>
+					<br><br><input type="text" id="fname" name="firstname" size="15" pattern="[A-Za-z]{3, 15}" placeholder="First Name" required autofocus>
+					<input type="text" id="lname" name="lastname" size="15" pattern="[A-Za-z]{3, 15}" placeholder="Last Name" required>
+					<input type="email" id="email" name="email" size="256" placeholder="Email ID" required>
+					<input type="password" id="password" name="password" size="16" pattern=".{8,}" placeholder="Password" required>
+					<input type="password" id="repassword" name="repassword" size="16" pattern=".{8,}" placeholder="Re-Enter Password" required>
+					<input type="submit" value="Sign up">
+				</form>
+			</div>
+		</div>
+		
+		<div id="login" class="modal">
+			<div class="modal-content">
+				<form action="./login.php" method="POST">
+					<div onclick="document.getElementById('login').style.display='none'" class="close" title="Close Form">
+						<i class="fa fa-close"style="font-size:25px;"></i>
+					</div>
+					<label style="font-size: 23px;color: black;text-align: center;">Login</label>
+					<br><br>
+					<input type="email" id="email" name="email" placeholder="Email ID" required autofocus>
+					<input type="password" id="password" name="password" placeholder="Password" pattern=".{8,}" required>
+					<input type="submit" value="Sign up">
+				</form>
+			</div>
+		</div>
+		
+		<script>
+			var modal1 = document.getElementById('create');
+			var modal2 = document.getElementById('login');
+			window.onclick = function(event) {
+				if (event.target == modal1) {
+					modal1.style.display = "none";
+				}
+			}
+			window.onclick = function(event) {
+				if (event.target == modal2) {
+					modal2.style.display = "none";
+				}
+			}
+			
+			function validateForm()
+			{
+				if(document.getElementById("password").value != document.getElementById("repassword").value)
+				{
+					alert("Password does not match the confirm password");
+					return false;
+				}
+			}
+		</script>	
+	</body>
+</html>

@@ -1,0 +1,52 @@
+body{
+	background:#424242;
+	color: white;
+	font-family: sans-serif;
+	text-align: center;
+}
+
+h1{
+	font-family: 'Raleway', sans-serif;
+	font-size: 60px;
+	margin: 10px;
+}
+
+p{
+	font-size: 14px;
+}
+
+.editor{
+	width: 95%;
+	height: auto;
+}
+
+.tools{
+	float: left;
+	width: 30%;
+	text-align: left;
+}
+
+.img{
+	width: 65%;
+	padding-left: 10px;
+	height: auto;
+}
+
+button{
+	color:white;
+	background-color: #45ADA8;
+	font-family: sans-serif;
+	border-radius: 10%;
+	border: 2px solid white;
+	padding: 5px;
+	margin-top: 2px;
+}
+
+input[type="file"]{
+	color: white;
+	background: #45ADA8;
+	border-radius: 2%;
+	border: 2px solid white;
+	padding: 10px;
+	margin-top: 5px;
+}

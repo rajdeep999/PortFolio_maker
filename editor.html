@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Editor</title>
+		<script type="text/javascript" src="script.js"></script>
+		<script type="text/javascript" src="caman.full.min.js"></script>
+	<style>
+	
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1; 
+			padding-top: 100px; 
+			left: 0;
+			top: 0;
+			width: 100%; 
+			height: 100%;
+			overflow: auto;
+			background-color: rgb(0,0,0); 
+			background-color: rgba(0,0,0,0.4);
+		}
+
+		.modal-content {
+			background-color: #fefefe;
+			margin: auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 40%;
+		}
+		input[type=range] {
+			width: 100%;
+			padding: 5px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		button{
+			width: 100%;
+			background-color: #ffffff;
+			color: black;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+		}
+		
+		ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+
+		li {
+			float: right;
+			margin-left: 5px;
+		}
+		
+		.buttons {
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+			background-color: #333;
+		}
+
+		.sidebar {
+		  margin: 0;
+		  padding: 0;
+		  width: 300px;
+		  background-color: #fff;
+		  position: fixed;
+		  height: 100%;
+		  overflow: auto;
+		}
+
+		.sidebar a {
+		  display: block;
+		  color: black;
+		  padding: 16px;
+		  text-decoration: none;
+		}
+
+		.sidebar a:hover {
+		  background-image: linear-gradient(#5f0ef9, #0c23f0);
+		  opacity:0.7;
+		  color: white;
+		}
+
+		div.content {
+		  margin-left: 300px;
+		  padding: 1px 16px;
+		  height: 1000px;
+		}
+		
+		.img{
+			width: 65%;
+			padding-left: 60px;
+			padding-top: 60px;
+			height: auto;
+		}
+
+		@media screen and (max-width: 700px) {
+		  .sidebar {
+			width: 100%;
+			height: auto;
+			position: relative;
+		  }
+		  .sidebar a {float: left;}
+		  div.content {margin-left: 0;}
+		}
+
+		@media screen and (max-width: 500px) {
+		  .sidebar a {
+			text-align: center;
+			float: none;
+		  }
+		  
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#basics").hide();
+			$("#filters").hide();
+		});
+		$(document).ready(function(){
+			$('#basicButton').on("click", function(){
+				$("#basics").toggle();
+			});
+		});
+		$(document).ready(function(){
+			$('#filterButton').on("click", function(){
+				$("#filters").toggle();
+			});
+		});
+	</script>
+	</head>
+	<body>
+		<div id="myModal" class="modal">
+		  <div class="modal-content">
+				<label>Upload Image File:</label><br> <br>
+				<input id="userImage" type="file" onchange="readURL(this);"><br><br>
+		  </div>
+		</div>
+		<div class="sidebar">
+			<a href="javascript:void(0)" id="basicButton">BASICS</a>
+				<div id="basics">
+					<p>
+						<label for="brightness">Brightness</label>
+						<input id="brightness" type="range" min=-100 max=100 name="brightness" value=0>
+					</p>
+					<p>
+						<label for="vibrance">Vibrance</label>
+						<input id="vibrance" type="range" min=-100 max=100 name="vibrance" value=0>
+					</p>
+					<p> 
+						<label for="hue">Hue</label>
+						<input id="hue" type="range" name="hue" min=-100 max=100 value=0>
+					</p>
+					<p>
+						<label for="gamma">Gamma</label>
+						<input id="gamma" type="range" name="gamma" min=0 max=10 value=0>
+					</p>
+				</div>
+			<a href="javascript:void(0)" id="filterButton">FILTERS</a>
+			<div id="filters">
+				<button id="vintage">Vintage</button>
+				<button id="lomo">Lomo</button>
+				<button id="orangepeel">Orange Peel</button>
+				<button id="sunrise">Sunrise</button>
+			</div>
+		</div>
+			<div class = "content">
+				<div>
+				<ul>
+					<li><button class="buttons" id="cancel">Cancel</button></li>
+				</ul>
+				</div>
+				<img id="image" class="img" src="img/download.png">
+			</div>
+			<div id="saveModal" class="modal">
+			  <div class="modal-content">
+					<button id="save">Save Image</button>
+					<button id="upload">Upload</button>
+			  </div>
+			  <script>
+				var modal = document.getElementById('myModal');
+				$(document).ready(function(){
+					modal.style.display = "block";
+				});
+				function readURL(input) {
+					if (input.files && input.files[0]) {
+						var reader = new FileReader();
+
+						reader.onload = function (e) {
+							$('#image').attr('src', e.target.result);
+						};
+						reader.readAsDataURL(input.files[0]);
+						modal.style.display = "none";
+					}
+				}
+				
+				$('#vintage').on('click', function(e) {
+				  Caman('#image', function() {
+					this.vintage();
+					this.render();
+				  });
+				});
+				
+				$('#lomo').on('click', function(e) {
+				  Caman('#image', function() {
+					this.lomo();
+					this.render();
+				  });
+				});
+				
+				$('#orangepeel').on('click', function(e) {
+				  Caman('#image', function() {
+					this.orangePeel();
+					this.render();
+				  });
+				});
+				
+				$('#sunrise').on('click', function(e) {
+				  Caman('#image', function() {
+					this.sunrise();
+					this.render();
+				  });
+				});
+				
+				$('#save').on('click', function(e) {
+				  Caman('#image', function() {
+					this.render(function(){
+						this.save("image.jpg");
+					});
+				  });
+				});
+				
+				document.addEventListener('DOMContentLoaded',function(){
+					function changeSliderHandler(event){
+						Caman("#image",function(){
+							this.revert(false);
+							this[event.target.name](event.target.value).render();
+						});
+					};
+					var brightnessRange = document.getElementById("brightness");
+					brightnessRange.onchange = changeSliderHandler;
+
+					var vibranceRange = document.getElementById("vibrance");
+					vibranceRange.onchange = changeSliderHandler;
+
+					var hueRange = document.getElementById("hue");
+					hueRange.onchange = changeSliderHandler;
+
+					var gammaRange = document.getElementById("gamma");
+					gammaRange.onchange = changeSliderHandler;
+
+				},false);
+var btn = document.getElementById("cancel");
+btn.onclick = function() {
+    window.location.assign("portfolio.php");
+}
+			</script>
+	</body>
+</html>
